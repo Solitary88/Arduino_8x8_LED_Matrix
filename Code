@@ -1,0 +1,73 @@
+const byte rows[8] = {2, 7, 19, 5, 13, 18, 12, 16};
+const byte cols[8] = {6, 11, 10, 3, 17, 4, 8, 9};
+
+int matrix [8][8];
+
+int x = 5;
+int y = 5;
+
+void setup() {
+  // setting pins as outputs
+  for ( int pin = 0; pin < 8; pin++) {
+    pinMode(rows[pin], OUTPUT);
+    pinMode(cols[pin], OUTPUT);
+    digitalWrite(cols[pin], HIGH);
+  }
+  // not exactly sure what this does
+  for (int x; x < 8; x++) {
+    for (int y; y < 8; y++) {
+      matrix[x][y] = HIGH;
+    }
+  }
+} // ***************************END OF SETUP************************
+
+void loop() {
+  // for individual LEDs
+  for (int row = 0; row < 8; row++) {
+    digitalWrite(rows[row], HIGH);
+    delay(150);
+    for (int y = 0; y < 8; y++) {
+      digitalWrite(cols[y], LOW);
+      delay(150);
+      digitalWrite(cols[y], HIGH);
+    }
+    digitalWrite(rows[row], LOW);
+  }
+  delay(400);
+  //************************************
+  // columns
+  for (int row = 0; row < 8; row++) {
+    digitalWrite(rows[row], HIGH);
+    delay(10);
+  }
+
+  for (int y = 0; y < 8; y++) {
+    digitalWrite(cols[y], LOW);
+    delay(150);
+    digitalWrite(cols[y], HIGH);
+  }
+
+  for (int row = 0; row < 8; row++) {
+    digitalWrite(rows[row], LOW);
+    delay(10);
+  }
+  delay(400);
+  // ****************************************
+  //rows
+  for (int col = 0; col < 8; col++) {
+    digitalWrite(cols[col], LOW);
+    delay(10);
+  }
+
+  for (int x = 0; x < 8; x++) {
+    digitalWrite(rows[x], HIGH);
+    delay(150);
+    digitalWrite(rows[x], LOW);
+  }
+
+  for (int col = 0; col < 8; col++) {
+    digitalWrite(cols[col], HIGH);
+    delay(10);
+  }
+  delay(400);
+} // *************************END OF LOOP*****************************
